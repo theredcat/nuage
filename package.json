@@ -1,0 +1,60 @@
+{
+  "name": "nuage",
+  "version": "0.2.0",
+  "description" : "A cloud-ready framework/CMS. Not yet production ready",
+  "bugs" : "https://github.com/theredcat/nuage/issues",
+  "homepage" : "https://github.com/theredcat/nuage",
+  "license" : "GPL-2.0",
+  "author" : {
+    "name" : "Nathan Delhaye",
+    "email" : "the@red.cat",
+  },
+  "repository" : {
+    "type" : "git",
+    "url" : "https://github.com/theredcat/nuage.git"
+  },
+  "config" : {
+    "security.user" : "omg",
+    "security.group" : "omg",
+
+    "system.port" : 80,
+    "system.maxUploadSize" : "10mb",
+    "system.allowRessourcesFrom" : "*",
+
+    "performances.gzip" : false,
+    "performances.staticTtl" : 3600,
+
+    "debug.assets" : true,
+
+    "log.format" : ":remote-addr \":method :url HTTP/:http-version\" :status :res[content-length] \":referrer\" \":user-agent\" :response-time ms",
+    "log.level" : "debug",
+    "log.dateFormat" : "yyyy/mm/dd HH:MM:ss Z",
+
+    "session.secret" : "4z7nf1s7v5t",
+    "session.ttl" : 3600,
+
+    "memcache.hosts" : [ "localhost:11211" ],
+    "memcache.poolSize" : "10",
+    "memcache.maxKeySize" : 24,
+    "memcache.maxValue" : 1048576
+  },
+  "scripts": {
+    "start": "node app.js",
+    "test" : "node app.js"
+  },
+  "dependencies": {
+    "look" : "*",
+    "express": "4.*",
+    "express-params": "0.0.3",
+    "less-middleware":"0.1.x",
+    "mmm": ">=0.2",
+    "memcached": "0.2.x",
+    "diacritics" : "1.1.x",
+    "uuid" : "1.4.x",
+    "nuage-log" : "git+http://pikacode.com/redcat/nuage-log.git#1.0.2",
+    "nuage-utils" : "git+http://pikacode.com/redcat/nuage-utils.git",
+  },
+  "engines" : { 
+    "node" : ">=0.10.28" 
+  }
+}
