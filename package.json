@@ -1,13 +1,13 @@
 {
   "name": "nuage",
   "version": "0.2.0",
-  "description" : "A cloud-ready framework/CMS. Not yet production ready",
+  "description" : "A cloud-ready framework/CMS",
   "bugs" : "https://github.com/theredcat/nuage/issues",
   "homepage" : "https://github.com/theredcat/nuage",
   "license" : "GPL-2.0",
   "author" : {
     "name" : "Nathan Delhaye",
-    "email" : "the@red.cat",
+    "email" : "the@red.cat"
   },
   "repository" : {
     "type" : "git",
@@ -52,7 +52,7 @@
     "diacritics" : "1.1.x",
     "uuid" : "1.4.x",
     "nuage-log" : "git+http://pikacode.com/redcat/nuage-log.git#1.0.2",
-    "nuage-utils" : "git+http://pikacode.com/redcat/nuage-utils.git",
+    "nuage-utils" : "git+http://pikacode.com/redcat/nuage-utils.git"
   },
   "engines" : { 
     "node" : ">=0.10.28" 
