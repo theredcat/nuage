@@ -228,7 +228,7 @@ _**Note** : parameters in italic are facultative_
 |getProperties||All user properties|An alias for exportToArray|
 |isAnonymous||Boolean||
 |login|Email, Password, Callback(User)||Log the user in. `False` will be passed to the callback instead of an user if the login wasn't successful|
-|validate|Token|Callback(Boolean)||Valide the user. The callback will receive True if the activation was successful|
+|validate|Token|Callback(Boolean)|Valide the user. The callback will receive True if the activation was successful|
 |isValid||Boolean|True is the user account as been validated, false Otherwise|
 |load|Uid,Callback(User)||Load an user from the database. The loaded user will be passer as callback parameter or false if the user doesn't exists|
 |can|Acl,_Acl_,_Acl_,...,Callback||The acl format is {module:'moduleName',name:'myAcl'}. If one of the Acl match, a True will be passed to the callback, False otherwise. The last parameter is the callback function|
