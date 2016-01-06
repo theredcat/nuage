@@ -1,0 +1,7 @@
+{
+	"http": {
+		"root": "./build/public/",
+		"port": 8080,
+		"gzip": true
+	}
+}

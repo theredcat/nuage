@@ -1,7 +1,0 @@
-<h1>{{messageHead}}</h1>
-<div class="{{messageType}}">
-	{{#icon}}<span class="{{icon}}"></span>{{/icon}}{{{message}}}
-	<ul>{{#list}}<li>{{{.}}}</li>{{/list}}</ul>
-</div>
-{{#messageBack}}<a href="javascript:history.back()">{{lang.Go_back}}</a>{{/messageBack}}
-{{#redirectLink}}<a href="{{redirectLink}}">{{redirectText}}</a>{{/redirectLink}}

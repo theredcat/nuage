@@ -1,60 +1,48 @@
 {
   "name": "nuage",
+  "description": "A Cloud-ready website builder",
   "version": "0.2.0",
-  "description" : "A cloud-ready framework/CMS",
-  "bugs" : "https://github.com/theredcat/nuage/issues",
-  "homepage" : "https://github.com/theredcat/nuage",
-  "license" : "GPL-2.0",
-  "author" : {
-    "name" : "Nathan Delhaye",
-    "email" : "the@red.cat"
+  "homepage": "https://github.com/root/nuage",
+  "author": {
+    "name": "Nathan DELHAYE",
+    "email": "contact@nathan-delhaye.fr",
+    "url": "http://www.nathan-delhaye.fr"
   },
-  "repository" : {
-    "type" : "git",
-    "url" : "https://github.com/theredcat/nuage.git"
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/root/nuage.git"
   },
-  "config" : {
-    "security.user" : "omg",
-    "security.group" : "omg",
-
-    "system.port" : 80,
-    "system.maxUploadSize" : "10mb",
-    "system.allowRessourcesFrom" : "*",
-
-    "performances.gzip" : false,
-    "performances.staticTtl" : 3600,
-
-    "debug.assets" : true,
-
-    "log.format" : ":remote-addr \":method :url HTTP/:http-version\" :status :res[content-length] \":referrer\" \":user-agent\" :response-time ms",
-    "log.level" : "debug",
-    "log.dateFormat" : "yyyy/mm/dd HH:MM:ss Z",
-
-    "session.secret" : "4z7nf1s7v5t",
-    "session.ttl" : 3600,
-
-    "memcache.hosts" : [ "localhost:11211" ],
-    "memcache.poolSize" : "10",
-    "memcache.maxKeySize" : 24,
-    "memcache.maxValue" : 1048576
+  "bugs": {
+    "url": "https://github.com/root/nuage/issues"
+  },
+  "license": "GPL-2.0",
+  "main": "lib/nuage",
+  "engines": {
+    "node": ">= 5.0.0"
   },
   "scripts": {
-    "start": "node app.js",
-    "test" : "node app.js"
+    "test": "grunt && grunt test",
+    "install": "grunt"
   },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "^0.1.13",
+    "grunt-contrib-copy": "^0.8.2",
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-watch": "~0.5.3",
+    "grunt-http": "^2.0.0",
+    "grunt-jscs": "^2.6.0",
+    "grunt-jsonlint": "^1.0.7",
+    "grunt-node-version": "^1.0.1",
+    "grunt-run": "^0.5.2",
+    "grunt-run-grunt": "^0.1.4",
+    "traceur": "0.0.96"
+  },
+  "keywords": [],
   "dependencies": {
-    "look" : "*",
-    "express": "4.*",
-    "express-params": "0.0.3",
-    "less-middleware":"0.1.x",
-    "mmm": ">=0.2",
-    "memcached": "0.2.x",
-    "diacritics" : "1.1.x",
-    "uuid" : "1.4.x",
-    "nuage-log" : "git+http://pikacode.com/redcat/nuage-log.git#1.0.2",
-    "nuage-utils" : "git+http://pikacode.com/redcat/nuage-utils.git"
-  },
-  "engines" : { 
-    "node" : ">=0.10.28" 
+    "bootstrap": "^4.0.0-alpha.2",
+    "ecstatic": "^1.4.0",
+    "jquery": "^2.1.4"
   }
 }
