@@ -2,6 +2,10 @@
 
 A Cloud-ready website builder
 
+** THIS IS NOT FINISHED YET **
+
+Check tag 0.2.0 if you want a working version (API won't be compatible with 0.3.0 as this is a complete rework)
+
 ## Getting Started
 Install the module with: `npm install nuage`
 
