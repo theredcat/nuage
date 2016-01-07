@@ -1,6 +1,22 @@
-module.exports = function(grunt) {
+var exec = require('child_process').spawnSync;
 
-	'use strict';
+module.exports = function( grunt ) {
+
+	"use strict";
+
+	var taskListTest = [
+		"jshint",
+		"jsonlint",
+		"jscs",
+		"default",
+		"nodeunit",
+	];
+	var taskListDefault = [
+		"node_version",
+		"copy:bootstrap",
+		"copy:jquery",
+		"copy:nuage"
+	];
 
 	// Project configuration.
 	grunt.initConfig({
@@ -9,61 +25,64 @@ module.exports = function(grunt) {
 				files: [
 					{
 						expand: true,
-						cwd: 'node_modules/bootstrap/dist',
-						src : ['**'],
-						dest: 'build/public/',
-					},
+						cwd: "node_modules/bootstrap/dist",
+						src: [ "**" ],
+						dest: "build/public/"
+					}
 				]
 			},
 			jquery: {
 				files: [
 					{
 						expand: true,
-						cwd: 'node_modules/jquery/dist',
-						src : ['**'],
-						dest: 'build/public/js/',
-					},
+						cwd: "node_modules/jquery/dist",
+						src: [ "**" ],
+						dest: "build/public/js/"
+					}
 				]
 			},
 			nuage: {
 				files: [
 					{
 						expand: true,
-						src : ['lib/**²'],
-						dest: 'build/',
+						src: [ "lib/**²" ],
+						dest: "build/"
 					},
 					{
 						expand: true,
-						src : ['public/**'],
-						dest: 'build/',
-					},
+						src: [ "public/**" ],
+						dest: "build/"
+					}
 				]
 			}
 		},
 		node_version: {
 			options: {
 				alwaysInstall: false,
-				errorLevel: 'warn',
+				errorLevel: "warn",
 				globals: [],
-				maxBuffer: 200*1024,
+				maxBuffer: 200 * 1024,
 				nvm: false,
-				override: ''
+				override: ""
 			}
 		},
 		http: {
 			getHome: {
 				options: {
-					url: 'your/url.com',
-				},
+					url: "your/url.com"
+				}
 			}
 		},
 		nodeunit: {
-			files: ['test/**/*_test.js'],
+			files: [ "test/**/*_test.js" ]
 		},
 		jsonlint: {
 			config: {
-				src: [ 'config.*.json' ]
+				src: [ "config.*.json" ]
 			}
+		},
+		htmllint: {
+			all: [ "build/**/*.html" ]
 		},
 		jshint: {
 			options: {
@@ -72,82 +91,79 @@ module.exports = function(grunt) {
 				camelcase: true
 			},
 			lib: {
-				src: ['lib/**/*.js']
+				src: [ "lib/**/*.js" ]
 			},
 			test: {
-				src: ['test/**/*.js']
+				src: [ "test/**/*.js" ]
 			},
 			gruntfile: {
 				options: {
 					camelcase: false
 				},
-				src: ['Gruntfile.js']
-			},
+				src: [ "Gruntfile.js" ]
+			}
 		},
 		jscs: {
 			options: {
 				fix: true,
 				verbose: true,
-				config: '.jscsrc'
+				config: ".jscsrc"
 			},
 			lib: {
 				files: [
-					{ src: 'lib/**/*.js' }
+					{ src: "lib/**/*.js" }
 				],
 				options: {
-					esnext: true,
-				},
+					esnext: true
+				}
 			},
 			test: {
 				files: [
-					{ src: 'test/**/*.js' }
-				]
-			},
-			gruntfile: {
-				files: [
-					{ src: 'Gruntfile.js' }
+					{ src: "test/**/*.js" }
 				]
 			}
+			//gruntfile: {
+			//	files: [
+			//		{ src: "Gruntfile.js" }
+			//	]
+			//}
 		},
 		watch: {
 			gruntfile: {
-				files: '<%= jshint.gruntfile.src %>',
-				tasks: ['jshint:gruntfile','jscs:gruntfile']
+				files: "<%= jshint.gruntfile.src %>",
+				tasks: [ "jshint:gruntfile", "jscs:gruntfile" ]
 			},
 			lib: {
-				files: '<%= jshint.lib.src %>',
-				tasks: ['jshint:lib', 'jscs:lib','nodeunit']
+				files: "<%= jshint.lib.src %>",
+				tasks: [ "jshint:lib", "jscs:lib", "nodeunit" ]
 			},
 			test: {
-				files: '<%= jshint.test.src %>',
-				tasks: ['jshint:test', 'jscs:test', 'nodeunit']
-			},
-		},
+				files: "<%= jshint.test.src %>",
+				tasks: [ "jshint:test", "jscs:test", "nodeunit" ]
+			}
+		}
 	});
 
 	// These plugins provide necessary tasks.
-	grunt.loadNpmTasks('grunt-contrib-nodeunit');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-contrib-copy');
+	grunt.loadNpmTasks( "grunt-contrib-nodeunit" );
+	grunt.loadNpmTasks( "grunt-contrib-jshint" );
+	grunt.loadNpmTasks( "grunt-contrib-watch" );
+	grunt.loadNpmTasks( "grunt-contrib-copy" );
 	grunt.loadNpmTasks("grunt-jscs");
-	grunt.loadNpmTasks('grunt-jsonlint');
-	grunt.loadNpmTasks('grunt-node-version');
-	grunt.loadNpmTasks('grunt-http');
+	grunt.loadNpmTasks( "grunt-jsonlint" );
+	grunt.loadNpmTasks( "grunt-node-version" );
+
+	var returnValue = exec('java', ['-version']);
+	if(returnValue.error) {
+		grunt.log.writeln("Java not found. HTML Test won't be performed");
+	} else {
+		grunt.loadNpmTasks( "grunt-html" );
+		taskListTest.push('htmllint');
+	}
+	grunt.loadNpmTasks( "grunt-http" );
 
 	// Default task.
-	grunt.registerTask('default', [
-		'node_version',
-		'copy:bootstrap',
-		'copy:jquery',
-		'copy:nuage',
-	]);
-	grunt.registerTask('test', [
-		'jshint',
-		'jsonlint',
-		'jscs',
-		'default',
-		'nodeunit'
-	]);
+	grunt.registerTask( "default", taskListDefault);
+	grunt.registerTask( "test", taskListTest);
 
 };
