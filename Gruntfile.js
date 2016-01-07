@@ -9,7 +9,7 @@ module.exports = function( grunt ) {
 		"jsonlint",
 		"jscs",
 		"default",
-		"nodeunit",
+		"nodeunit"
 	];
 	var taskListDefault = [
 		"node_version",
@@ -45,12 +45,22 @@ module.exports = function( grunt ) {
 				files: [
 					{
 						expand: true,
-						src: [ "lib/**²" ],
+						src: [ "lib/**" ],
+						dest: "build/"
+					},
+					{
+						expand: true,
+						src: [ "bin/**" ],
 						dest: "build/"
 					},
 					{
 						expand: true,
 						src: [ "public/**" ],
+						dest: "build/"
+					},
+					{
+						expand: true,
+						src: [ "config.*.json" ],
 						dest: "build/"
 					}
 				]
@@ -79,6 +89,9 @@ module.exports = function( grunt ) {
 		jsonlint: {
 			config: {
 				src: [ "config.*.json" ]
+			},
+			package: {
+				src: [ "package.json" ]
 			}
 		},
 		htmllint: {
@@ -89,6 +102,9 @@ module.exports = function( grunt ) {
 				esnext: true,
 				node: true,
 				camelcase: true
+			},
+			bin: {
+				src: [ "bin/**/*.js" ]
 			},
 			lib: {
 				src: [ "lib/**/*.js" ]
@@ -108,6 +124,14 @@ module.exports = function( grunt ) {
 				fix: true,
 				verbose: true,
 				config: ".jscsrc"
+			},
+			bin: {
+				files: [
+					{ src: "bin/**/*.js" }
+				],
+				options: {
+					esnext: true
+				}
 			},
 			lib: {
 				files: [
@@ -137,6 +161,10 @@ module.exports = function( grunt ) {
 				files: "<%= jshint.lib.src %>",
 				tasks: [ "jshint:lib", "jscs:lib", "nodeunit" ]
 			},
+			bin: {
+				files: "<%= jshint.lib.src %>",
+				tasks: [ "jshint:bin", "jscs:bin", "nodeunit" ]
+			},
 			test: {
 				files: "<%= jshint.test.src %>",
 				tasks: [ "jshint:test", "jscs:test", "nodeunit" ]
@@ -149,13 +177,13 @@ module.exports = function( grunt ) {
 	grunt.loadNpmTasks( "grunt-contrib-jshint" );
 	grunt.loadNpmTasks( "grunt-contrib-watch" );
 	grunt.loadNpmTasks( "grunt-contrib-copy" );
-	grunt.loadNpmTasks("grunt-jscs");
+	grunt.loadNpmTasks( "grunt-jscs" );
 	grunt.loadNpmTasks( "grunt-jsonlint" );
 	grunt.loadNpmTasks( "grunt-node-version" );
 
 	var returnValue = exec('java', ['-version']);
 	if(returnValue.error) {
-		grunt.log.writeln("Java not found. HTML Test won't be performed");
+		grunt.log.error("Java not found. HTML Test won't be performed");
 	} else {
 		grunt.loadNpmTasks( "grunt-html" );
 		taskListTest.push('htmllint');

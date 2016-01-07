@@ -21,10 +21,15 @@
     "node": ">= 5.0.0"
   },
   "scripts": {
+    "start": "node ./build/bin/nuage.js",
     "test": "grunt && grunt test",
     "install": "grunt"
   },
+  "bin": {
+    "nuage": "./build/bin/nuage.js"
+  },
   "devDependencies": {
+    "bootstrap": "^4.0.0-alpha.2",
     "grunt": "~0.4.5",
     "grunt-cli": "^0.1.13",
     "grunt-contrib-copy": "^0.8.2",
@@ -38,12 +43,13 @@
     "grunt-node-version": "^1.0.1",
     "grunt-run": "^0.5.2",
     "grunt-run-grunt": "^0.1.4",
-    "traceur": "0.0.96"
+    "grunt-traceur": "^0.5.4",
+    "jquery": "^2.1.4",
+    "nodeunit-httpclient": "^0.2.1"
   },
   "keywords": [],
   "dependencies": {
-    "bootstrap": "^4.0.0-alpha.2",
     "ecstatic": "^1.4.0",
-    "jquery": "^2.1.4"
+    "traceur": "0.0.96"
   }
 }
